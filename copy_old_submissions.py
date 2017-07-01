@@ -20,31 +20,25 @@ def copy_lab_one_folder(class_dir, quarter_folder, to_dir, lab_name, file_name):
         from_student_dir = os.path.join(from_dir, student_folder)
         if not os.path.isdir(from_student_dir):
             continue
-        submission_file = os.path.join(from_student_dir, file_name[0])
-        submission_file_lower = os.path.join(from_student_dir, file_name[0].lower())
-        submission_file_alternate = os.path.join(from_student_dir, file_name[1])
-        submission_file_alternate_lower = os.path.join(from_student_dir, file_name[1].lower())
         to_student_dir = os.path.join(to_dir, quarter_folder.split(".")[1] + "_" + student_folder)
-        if os.path.isfile(submission_file):
-            os.mkdir(to_student_dir)
-            copyfile(submission_file, os.path.join(to_student_dir, file_name[0]))
-        elif os.path.isfile(submission_file_lower):
-            os.mkdir(to_student_dir)
-            copyfile(submission_file_lower, os.path.join(to_student_dir, file_name[0]))
-        elif os.path.isfile(submission_file_alternate):
-            os.mkdir(to_student_dir)
-            copyfile(submission_file_alternate, os.path.join(to_student_dir, file_name[0]))
-        elif os.path.isfile(submission_file_alternate_lower):
-            os.mkdir(to_student_dir)
-            copyfile(submission_file_alternate_lower, os.path.join(to_student_dir, file_name[0]))
-        else:
+        if os.path.exists(to_student_dir):
+            continue
+
+        for name in file_name:
+            submission_file = os.path.join(from_student_dir, name)
+            if os.path.isfile(submission_file):
+                os.mkdir(to_student_dir)
+                copyfile(submission_file, os.path.join(to_student_dir, file_name[0]))
+                break
+
+        if not os.path.exists(to_student_dir):
             print("Warning! " + file_name[0] + " does not exist in: " + from_student_dir + " [Actual files: " +
                   ",".join(os.listdir(from_student_dir)) + "]")
             continue
 
 
 if __name__ == "__main__":
-    g_current_folder_name = "cmps012a-pt.w17"
+    g_current_folder_name = "cmps011-pt.s17"
     g_previous_folder_names = [
         "cmps011-pt.w14",
         "cmps011-pt.w15",
@@ -53,16 +47,18 @@ if __name__ == "__main__":
         "cmps012a-pt.w13",
         "cmps012a-pt.s14",
         "cmps012a-pt.f15",
-        "cmps012a-pt.w16"
+        "cmps012a-pt.w16",
+        "cmps012a-pt.w17"
     ]
 
     g_class_dir = "/afs/cats.ucsc.edu/class"
-    g_submissions_previous_dir = "/afs/cats.ucsc.edu/class/cmps012a-pt.w17/bin/moss/submissions_previous"
-    g_submissions_current_dir = "/afs/cats.ucsc.edu/class/cmps012a-pt.w17/bin/moss/submissions_current"
+    g_submissions_previous_dir = "/afs/cats.ucsc.edu/class/cmps011-pt.s17/bin/moss/submissions_previous"
+    g_submissions_current_dir = "/afs/cats.ucsc.edu/class/cmps011-pt.s17/bin/moss/submissions_current"
 
-    g_lab_name = "pa3"
-    g_special_lab_name = ["spec_pa3", "pa3-spec", "pa3_spec", "spa3"]
-    g_file_name = ["GCD.java", "GDC.java"]
+    g_lab_name = "pa6"
+    g_special_lab_name = ["spec_" + g_lab_name, g_lab_name + "-spec", g_lab_name + "_spec", "s" + g_lab_name,
+                          "spec-" + g_lab_name]
+    g_file_name = ["Complex.java", "complex.java"]
 
     g_to_dir_previous = os.path.join(g_submissions_previous_dir, g_lab_name)
     if os.path.exists(g_to_dir_previous):
