@@ -38,12 +38,13 @@ def copy_lab_one_folder(class_dir, quarter_folder, to_dir, lab_name, file_name):
 
 
 if __name__ == "__main__":
-    g_current_folder_name = "cmps011-pt.s17"
+    g_current_folder_name = "cmps012a-pt.w18"
     g_previous_folder_names = [
         "cmps011-pt.w14",
         "cmps011-pt.w15",
         "cmps011-pt.s15",
         "cmps011-pt.w16",
+        "cmps011-pt.s17",
         "cmps012a-pt.w13",
         "cmps012a-pt.s14",
         "cmps012a-pt.f15",
@@ -52,13 +53,15 @@ if __name__ == "__main__":
     ]
 
     g_class_dir = "/afs/cats.ucsc.edu/class"
-    g_submissions_previous_dir = "/afs/cats.ucsc.edu/class/cmps011-pt.s17/bin/moss/submissions_previous"
-    g_submissions_current_dir = "/afs/cats.ucsc.edu/class/cmps011-pt.s17/bin/moss/submissions_current"
+    g_submissions_previous_dir = "/afs/cats.ucsc.edu/class/cmps012a-pt.w18/bin/moss/submissions_previous"
+    g_submissions_current_dir = "/afs/cats.ucsc.edu/class/cmps012a-pt.w18/bin/moss/submissions_current"
 
-    g_lab_name = "pa6"
+    g_lab_name = "pa5"
+    # All possible names for late submission folders.
     g_special_lab_name = ["spec_" + g_lab_name, g_lab_name + "-spec", g_lab_name + "_spec", "s" + g_lab_name,
                           "spec-" + g_lab_name]
-    g_file_name = ["Complex.java", "complex.java"]
+    # All possible names for submission files.
+    g_file_name = ["Queens.java", "queens.java", "Queen.java", "queen.java"]
 
     g_to_dir_previous = os.path.join(g_submissions_previous_dir, g_lab_name)
     if os.path.exists(g_to_dir_previous):
